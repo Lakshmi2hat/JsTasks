@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .container {
+            width: 416px;
+            margin: 20px auto;
+        }
+        span.close {
+            width: 18px;
+            height: 18px;
+            border-radius: 50px;
+            display: block;
+            font-size: 14px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: 1px solid;
+            text-align: center;
+            color: #fff;
+            background: #ba1515;
+        }
+        span.close:after {
+            content: "\00d7";
+        }
+        .form_text {
+            width: 300px;
+            height: 50px;
+            padding: 0 12px;
+        }
+        .add {
+            padding: 0 30px;
+            height: 52px;
+            background: #cbeef3;
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+        }
+        ul {
+            padding: 0;
+            display: block;
+            list-style: none;
+        }
+        li {
+            display: block;
+            margin: 12px 0;
+            padding: 0 12px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="todo_value" class="form_text">
+        <button onclick="add()" class="add">Add</button>
+        <ul class="to-do" id="todo_box"></ul>
+    </div>
+
+    <script>
+        var todo_box = document.getElementById('todo_box');
+        var todo_value = document.getElementById('todo_value')
+        
+
+        function add() {
+            var li = document.createElement("li");  
+            if(todo_value && todo_value.value) {
+                todo_box.append(li);
+            }
+            
+            li.innerHTML = todo_value.value;
+            var dateSpan = document.createElement('span')
+            li.append(dateSpan);
+            dateSpan.classList.add('close');
+            dateSpan.addEventListener("click", function() {
+                this.parentElement.style.display = 'none';
+            })
+        }
+
+    </script>
+</body>
+</html>

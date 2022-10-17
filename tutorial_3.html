@@ -21,7 +21,15 @@
                 fill: yellow;
                 fill-rule: unset;
             }
-            .bulb.inactive svg .cls-1{
+            .bulb.active.unblink svg .cls-1{
+                fill: yellow;
+                fill-rule: unset;
+            }
+            .bulb.blink svg .cls-1{
+                fill: yellow;
+                fill-rule: unset;
+            }
+            .bulb.unblink svg .cls-1{
                 fill:black;
                 fill-rule: evenodd;
             }
@@ -35,7 +43,7 @@
     <div>
   <button id="bulbbtn" class="bulb_btn">Bulb on/off</button>
   <button id="blinkbtn" class="bulb_btn">Blink Bulb</button>
-  <button id="blinkoff" class="bulb_btn" onclick="blinkoff()">Blink off</button>
+  <button id="blinkoff" class="bulb_btn">Blink off</button>
 </div>
     </div>
     <script>
@@ -45,42 +53,33 @@
         let blinkbtn = document.getElementById("blinkbtn");
         let blinkoffbtn = document.getElementById("blinkoff");
 
-            var bulb = {
+        function bulbon(){
+                bulbid.classList.add('unblink');
+            if(!(bulbid).classList.contains('active')){
+                bulbid.classList.add('active');
                 
-                switchOn: function () {
-                        bulbid.classList.add("active");
-                },
-                switchOff: function () {
-                        bulbid.classList.remove("active");
-                },
-                
-                init: function () {
-                    bulbbtn.addEventListener("click", function () {
-                        if(!(bulbid).classList.contains('active')){
-                                bulb.switchOn();
-                        }
-                        else if(bulbid.classList.contains('active')){
-                                bulb.switchOff();
-                        
-                        }
-                    });
-                }
-            
-            };
+            }
+            else {
+                bulbid.classList.remove('active');
+            }
+        }
 
-            bulb.init();
+        bulbbtn.addEventListener("click", function () {
+            bulbon();
+        });
             
             function blinkbulb(){
-                bulbid.classList.remove('inactive');
+                bulbid.classList.remove('active');
+                bulbid.classList.remove('unblink');
                 setInterval(function(){
-                    if(!bulbid.classList.contains('active')){
-                        bulbid.classList.add('active');
+                    if(!bulbid.classList.contains('blink')){
+                        bulbid.classList.add('blink');
                     }
                     else {
-                        bulbid.classList.remove('active');
+                        bulbid.classList.remove('blink');
                     }
-                }, 800);
-            }
+                }, 1000);
+            }8
             
 
             blinkbtn.addEventListener("click", function () {
@@ -88,15 +87,15 @@
             });
   
             function blinkoff(){
-                if(!bulbid.classList.contains('active')){
-                        bulbid.classList.remove('active');
-                        bulbid.classList.add('inactive');
-                }
+                bulbid.classList.add('unblink');
+                bulbid.classList.remove('blink');
             }
 
-            // blinkoffbtn.addEventListener("click", function () {
-            //     blinkoff();
-            // });
+            blinkoffbtn.addEventListener("click", function () {
+                blinkoff();
+            });
+
+            
 
   </script>
     </body>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .container {
+            width: 500px;
+            background: #f5f5f5;
+            padding: 30px;
+            margin: 20px auto;
+        }
+        form {
+            border: 1px solid #9cd7bb;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        span.close {
+            width: 16px;
+            height: 16px;
+            border-radius: 50px;
+            display: block;
+            font-size: 12px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: 2px solid #d85a68;
+            text-align: center;
+            color: #d85a68;
+            font-weight: 600;
+            background: #fff;
+        }
+        span.close:after {
+            content: "\00d7";
+            font-size: 15px;
+            line-height: 0.8;
+            font-weight: 600;
+        }
+        .form_text {
+            width: 80%;
+            height: 40px;
+            padding: 0 12px;
+            border: none;
+            background: #fff;
+        }
+        input:-internal-autofill-selected {
+           background: #fff;
+        }
+        .form_text:focus {
+            outline: none;
+            background: #fff;
+        }
+        .add {
+            padding: 0 30px;
+            height: 42px;
+            font-size: 15px;
+            background: #f5f5f5;
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+            border-left: 1px solid #9cd7bb;
+        }
+        ul {
+            padding: 0;
+            display: block;
+            list-style: none;
+            margin-top: 30px;
+        }
+        li {
+            display: block;
+            margin: 20px 0;
+            font-size: 17px;
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 0;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        <form>
+            <input type="text" id="todo_value" class="form_text" placeholder="Name...." />
+            <button type="button" id="add" onclick="addRecord();" class="add">Add </button>
+        </form>
+        <ul class="to-do" id="todo_box"></ul>
+    </div>
+<script>
+
+values = [];
+var todo_value = document.getElementById("todo_value");
+var todo_box = document.getElementById('todo_box');
+
+function addRecord() {
+  length= values.length;
+  if(todo_value && todo_value.value){
+    values.push(todo_value.value);
+    var li = document.createElement("li"); 
+    li.classList.add('list');
+    todo_box.append(li);
+    
+    var list = document.getElementsByClassName('list');
+    
+    for(i=0;i<=length;i++){
+        list[i].innerHTML = values[i];
+        list[i].id = i;
+        var dateSpan = document.createElement('span')
+        list[i].append(dateSpan);
+        dateSpan.classList.add('close');
+            dateSpan.addEventListener("click", function() {
+                var index = this.parentElement.id;
+                values.splice(index, 1);
+                this.parentElement.remove();
+            });
+        
+    }
+
+  }
+}
+
+
+</script>
+</body>
+</html>
